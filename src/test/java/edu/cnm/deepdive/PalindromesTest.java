@@ -1,26 +1,16 @@
 package edu.cnm.deepdive;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 class PalindromesTest {
 
-  static final String[] args = {
-    "radar",
-    "sonar",
-    "abba",
-    "abb",
-    "x",
-    "",
 
-  };
-
-  static final boolean[] expected = {
-      true,
-      false,
-      	true,
-      	false,
-      	true,
-      	true,
-
-  };
+  @ParameterizedTest()
+  @CsvFileSource(resources = "palindromes.csv", numLinesToSkip = 1)
+  void checkRecursive(String input, boolean expected) {
+    assertEquals(expected, Palindromes.checkRecursive(input));
+  }
 }
